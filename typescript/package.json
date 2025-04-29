@@ -1,5 +1,10 @@
 {
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.10.2"
+  },
+  "type": "module",
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
   }
 }
