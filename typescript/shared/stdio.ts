@@ -1,4 +1,5 @@
 import { JSONRPCMessage, JSONRPCMessageSchema } from "../types.ts";
+import { Buffer } from "node:buffer";
 
 /**
  * Buffers a continuous stdio stream into discrete JSON-RPC messages.
