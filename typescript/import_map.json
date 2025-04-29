@@ -1,0 +1,6 @@
+{
+    "imports": {
+      "zod": "https://deno.land/x/zod@v3.23.8/mod.ts",
+      "zod-to-json-schema": "https://deno.land/x/zod_to_json_schema@v3.24.5/mod.ts"
+    }
+  }
