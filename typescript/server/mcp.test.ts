@@ -1,6 +1,6 @@
-import { McpServer } from "./mcp.js";
-import { Client } from "../client/index.js";
-import { InMemoryTransport } from "../inMemory.js";
+import { McpServer } from "./mcp.ts";
+import { Client } from "../client/index.ts";
+import { InMemoryTransport } from "../inMemory.ts";
 import { z } from "zod";
 import {
   ListToolsResultSchema,
@@ -494,7 +494,7 @@ describe("tool()", () => {
     expect(result.tools[0].name).toBe("test");
     expect(result.tools[0].description).toBe("Test description");
   });
-  
+
   test("should register tool with annotations", async () => {
     const mcpServer = new McpServer({
       name: "test server",
@@ -533,7 +533,7 @@ describe("tool()", () => {
     expect(result.tools[0].name).toBe("test");
     expect(result.tools[0].annotations).toEqual({ title: "Test Tool", readOnlyHint: true });
   });
-  
+
   test("should register tool with params and annotations", async () => {
     const mcpServer = new McpServer({
       name: "test server",
@@ -545,7 +545,7 @@ describe("tool()", () => {
     });
 
     mcpServer.tool(
-      "test", 
+      "test",
       { name: z.string() },
       { title: "Test Tool", readOnlyHint: true },
       async ({ name }) => ({
@@ -574,7 +574,7 @@ describe("tool()", () => {
     });
     expect(result.tools[0].annotations).toEqual({ title: "Test Tool", readOnlyHint: true });
   });
-  
+
   test("should register tool with description, params, and annotations", async () => {
     const mcpServer = new McpServer({
       name: "test server",
@@ -586,7 +586,7 @@ describe("tool()", () => {
     });
 
     mcpServer.tool(
-      "test", 
+      "test",
       "A tool with everything",
       { name: z.string() },
       { title: "Complete Test Tool", readOnlyHint: true, openWorldHint: false },
@@ -615,8 +615,8 @@ describe("tool()", () => {
       type: "object",
       properties: { name: { type: "string" } }
     });
-    expect(result.tools[0].annotations).toEqual({ 
-      title: "Complete Test Tool", 
+    expect(result.tools[0].annotations).toEqual({
+      title: "Complete Test Tool",
       readOnlyHint: true,
       openWorldHint: false
     });

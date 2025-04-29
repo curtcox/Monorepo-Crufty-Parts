@@ -1,9 +1,9 @@
 import { createServer, type Server, IncomingMessage, ServerResponse } from "node:http";
 import { AddressInfo } from "node:net";
 import { randomUUID } from "node:crypto";
-import { EventStore, StreamableHTTPServerTransport, EventId, StreamId } from "./streamableHttp.js";
-import { McpServer } from "./mcp.js";
-import { CallToolResult, JSONRPCMessage } from "../types.js";
+import { EventStore, StreamableHTTPServerTransport, EventId, StreamId } from "./streamableHttp.ts";
+import { McpServer } from "./mcp.ts";
+import { CallToolResult, JSONRPCMessage } from "../types.ts";
 import { z } from "zod";
 
 /**
@@ -313,7 +313,7 @@ describe("StreamableHTTPServerTransport", () => {
     // First initialize to get a session ID
     sessionId = await initializeServer();
 
-    // Open a standalone SSE stream  
+    // Open a standalone SSE stream
     const sseResponse = await fetch(baseUrl, {
       method: "GET",
       headers: {
@@ -810,7 +810,7 @@ describe("StreamableHTTPServerTransport with pre-parsed body", () => {
       id: "preparsed-1",
     };
 
-    // Send an empty body since we'll use pre-parsed body  
+    // Send an empty body since we'll use pre-parsed body
     const response = await fetch(baseUrl, {
       method: "POST",
       headers: {
@@ -1028,7 +1028,7 @@ describe("StreamableHTTPServerTransport with resumability", () => {
     expect(idMatch).toBeTruthy();
     const firstEventId = idMatch![1];
 
-    // Send a second notification 
+    // Send a second notification
     await mcpServer.server.sendLoggingMessage({ level: "info", data: "Second notification from MCP server" });
 
     // Close the first SSE stream to simulate a disconnect
@@ -1117,7 +1117,7 @@ describe("StreamableHTTPServerTransport in stateless mode", () => {
   });
 
   it("should reject second SSE stream even in stateless mode", async () => {
-    // Despite no session ID requirement, the transport still only allows 
+    // Despite no session ID requirement, the transport still only allows
     // one standalone SSE stream at a time
 
     // Initialize the server first

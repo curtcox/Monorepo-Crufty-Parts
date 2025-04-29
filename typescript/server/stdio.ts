@@ -1,8 +1,8 @@
 import process from "node:process";
 import { Readable, Writable } from "node:stream";
-import { ReadBuffer, serializeMessage } from "../shared/stdio.js";
-import { JSONRPCMessage } from "../types.js";
-import { Transport } from "../shared/transport.js";
+import { ReadBuffer, serializeMessage } from "../shared/stdio.ts";
+import { JSONRPCMessage } from "../types.ts";
+import { Transport } from "../shared/transport.ts";
 
 /**
  * Server transport for stdio: this communicates with a MCP client by reading from the current process' stdin and writing to stdout.
@@ -73,7 +73,7 @@ export class StdioServerTransport implements Transport {
       // This prevents interfering with other parts of the application that might be using stdin
       this._stdin.pause();
     }
-    
+
     // Clear the buffer and notify closure
     this._readBuffer.clear();
     this.onclose?.();

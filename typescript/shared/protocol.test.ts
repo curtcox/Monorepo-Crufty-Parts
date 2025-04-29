@@ -7,9 +7,9 @@ import {
   Request,
   Result,
   ServerCapabilities,
-} from "../types.js";
-import { Protocol, mergeCapabilities } from "./protocol.js";
-import { Transport } from "./transport.js";
+} from "../types.ts";
+import { Protocol, mergeCapabilities } from "./protocol.ts";
+import { Transport } from "./transport.ts";
 
 // Mock Transport class
 class MockTransport implements Transport {
@@ -83,9 +83,9 @@ describe("protocol tests", () => {
         resetTimeoutOnProgress: false,
         onprogress: onProgressMock,
       });
-      
+
       jest.advanceTimersByTime(800);
-      
+
       if (transport.onmessage) {
         transport.onmessage({
           jsonrpc: "2.0",
@@ -98,14 +98,14 @@ describe("protocol tests", () => {
         });
       }
       await Promise.resolve();
-      
+
       expect(onProgressMock).toHaveBeenCalledWith({
         progress: 50,
         total: 100,
       });
-      
+
       jest.advanceTimersByTime(201);
-      
+
       await expect(requestPromise).rejects.toThrow("Request timed out");
     });
 

@@ -1,7 +1,7 @@
 import { Readable, Writable } from "node:stream";
-import { ReadBuffer, serializeMessage } from "../shared/stdio.js";
-import { JSONRPCMessage } from "../types.js";
-import { StdioServerTransport } from "./stdio.js";
+import { ReadBuffer, serializeMessage } from "../shared/stdio.ts";
+import { JSONRPCMessage } from "../types.ts";
+import { StdioServerTransport } from "./stdio.ts";
 
 let input: Readable;
 let outputBuffer: ReadBuffer;

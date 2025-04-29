@@ -16,9 +16,9 @@ import {
   SetLevelRequestSchema,
   ErrorCode,
 } from "../types.js";
-import { Transport } from "../shared/transport.js";
-import { InMemoryTransport } from "../inMemory.js";
-import { Client } from "../client/index.js";
+import { Transport } from "../shared/transport.ts";
+import { InMemoryTransport } from "../inMemory.ts";
+import { Client } from "../client/index.ts";
 
 test("should accept latest protocol version", async () => {
   let sendPromiseResolve: (value: unknown) => void;

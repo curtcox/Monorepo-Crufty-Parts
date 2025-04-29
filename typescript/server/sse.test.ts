@@ -1,6 +1,6 @@
-import http from 'http'; 
+import http from 'http';
 import { jest } from '@jest/globals';
-import { SSEServerTransport } from './sse.js'; 
+import { SSEServerTransport } from './sse.ts';
 
 const createMockResponse = () => {
   const res = {
@@ -10,13 +10,13 @@ const createMockResponse = () => {
   };
   res.writeHead.mockReturnThis();
   res.on.mockReturnThis();
-  
+
   return res as unknown as http.ServerResponse;
 };
 
 describe('SSEServerTransport', () => {
-  describe('start method', () => { 
-    it('should correctly append sessionId to a simple relative endpoint', async () => { 
+  describe('start method', () => {
+    it('should correctly append sessionId to a simple relative endpoint', async () => {
       const mockRes = createMockResponse();
       const endpoint = '/messages';
       const transport = new SSEServerTransport(endpoint, mockRes);
@@ -31,7 +31,7 @@ describe('SSEServerTransport', () => {
       );
     });
 
-    it('should correctly append sessionId to an endpoint with existing query parameters', async () => { 
+    it('should correctly append sessionId to an endpoint with existing query parameters', async () => {
       const mockRes = createMockResponse();
       const endpoint = '/messages?foo=bar&baz=qux';
       const transport = new SSEServerTransport(endpoint, mockRes);
@@ -46,7 +46,7 @@ describe('SSEServerTransport', () => {
       );
     });
 
-    it('should correctly append sessionId to an endpoint with a hash fragment', async () => { 
+    it('should correctly append sessionId to an endpoint with a hash fragment', async () => {
       const mockRes = createMockResponse();
       const endpoint = '/messages#section1';
       const transport = new SSEServerTransport(endpoint, mockRes);
@@ -61,7 +61,7 @@ describe('SSEServerTransport', () => {
       );
     });
 
-    it('should correctly append sessionId to an endpoint with query parameters and a hash fragment', async () => { 
+    it('should correctly append sessionId to an endpoint with query parameters and a hash fragment', async () => {
       const mockRes = createMockResponse();
       const endpoint = '/messages?key=value#section2';
       const transport = new SSEServerTransport(endpoint, mockRes);
@@ -76,7 +76,7 @@ describe('SSEServerTransport', () => {
       );
     });
 
-    it('should correctly handle the root path endpoint "/"', async () => { 
+    it('should correctly handle the root path endpoint "/"', async () => {
       const mockRes = createMockResponse();
       const endpoint = '/';
       const transport = new SSEServerTransport(endpoint, mockRes);
@@ -91,9 +91,9 @@ describe('SSEServerTransport', () => {
       );
     });
 
-    it('should correctly handle an empty string endpoint ""', async () => { 
+    it('should correctly handle an empty string endpoint ""', async () => {
       const mockRes = createMockResponse();
-      const endpoint = ''; 
+      const endpoint = '';
       const transport = new SSEServerTransport(endpoint, mockRes);
       const expectedSessionId = transport.sessionId;
 

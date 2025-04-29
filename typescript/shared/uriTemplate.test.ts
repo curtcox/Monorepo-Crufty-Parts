@@ -1,4 +1,4 @@
-import { UriTemplate } from "./uriTemplate.js";
+import { UriTemplate } from "./uriTemplate.ts";
 
 describe("UriTemplate", () => {
   describe("isTemplate", () => {

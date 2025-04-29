@@ -22,9 +22,9 @@ import {
   Result,
   ServerCapabilities,
   RequestMeta,
-} from "../types.js";
-import { Transport, TransportSendOptions } from "./transport.js";
-import { AuthInfo } from "../server/auth/types.js";
+} from "../types.ts";
+import { Transport, TransportSendOptions } from "./transport.ts";
+import { AuthInfo } from "../server/auth/types.ts";
 
 /**
  * Callback for progress notifications.
@@ -129,14 +129,14 @@ export type RequestHandlerExtra<SendRequestT extends Request,
 
     /**
      * Sends a notification that relates to the current request being handled.
-     * 
+     *
      * This is used by certain transports to correctly associate related messages.
      */
     sendNotification: (notification: SendNotificationT) => Promise<void>;
 
     /**
      * Sends a request that relates to the current request being handled.
-     * 
+     *
      * This is used by certain transports to correctly associate related messages.
      */
     sendRequest: <U extends ZodType<object>>(request: SendRequestT, resultSchema: U, options?: RequestOptions) => Promise<z.infer<U>>;

@@ -1,6 +1,6 @@
 import { IncomingMessage, ServerResponse } from "node:http";
-import { Transport } from "../shared/transport.js";
-import { isInitializeRequest, isJSONRPCError, isJSONRPCRequest, isJSONRPCResponse, JSONRPCMessage, JSONRPCMessageSchema, RequestId } from "../types.js";
+import { Transport } from "../shared/transport.ts";
+import { isInitializeRequest, isJSONRPCError, isJSONRPCRequest, isJSONRPCResponse, JSONRPCMessage, JSONRPCMessageSchema, RequestId } from "../types.ts";
 import getRawBody from "raw-body";
 import contentType from "content-type";
 import { randomUUID } from "node:crypto";
@@ -34,7 +34,7 @@ export interface StreamableHTTPServerTransportOptions {
   /**
    * Function that generates a session ID for the transport.
    * The session ID SHOULD be globally unique and cryptographically secure (e.g., a securely generated UUID, a JWT, or a cryptographic hash)
-   * 
+   *
    * Return undefined to disable session management.
    */
   sessionIdGenerator: (() => string) | undefined;
@@ -65,33 +65,33 @@ export interface StreamableHTTPServerTransportOptions {
 /**
  * Server transport for Streamable HTTP: this implements the MCP Streamable HTTP transport specification.
  * It supports both SSE streaming and direct HTTP responses.
- * 
+ *
  * Usage example:
- * 
+ *
  * ```typescript
  * // Stateful mode - server sets the session ID
  * const statefulTransport = new StreamableHTTPServerTransport({
  *   sessionIdGenerator: () => randomUUID(),
  * });
- * 
+ *
  * // Stateless mode - explicitly set session ID to undefined
  * const statelessTransport = new StreamableHTTPServerTransport({
  *   sessionIdGenerator: undefined,
  * });
- * 
+ *
  * // Using with pre-parsed request body
  * app.post('/mcp', (req, res) => {
  *   transport.handleRequest(req, res, req.body);
  * });
  * ```
- * 
+ *
  * In stateful mode:
  * - Session ID is generated and included in response headers
  * - Session ID is always included in initialization responses
  * - Requests with invalid session IDs are rejected with 404 Not Found
  * - Non-initialization requests without a session ID are rejected with 400 Bad Request
  * - State is maintained in-memory (connections, message history)
- * 
+ *
  * In stateless mode:
  * - No Session ID is included in any responses
  * - No session validation is performed
@@ -376,7 +376,7 @@ export class StreamableHTTPServerTransport implements Transport {
 
       }
       // If an Mcp-Session-Id is returned by the server during initialization,
-      // clients using the Streamable HTTP transport MUST include it 
+      // clients using the Streamable HTTP transport MUST include it
       // in the Mcp-Session-Id header on all of their subsequent HTTP requests.
       if (!isInitializationRequest && !this.validateSession(req, res)) {
         return;
