@@ -1,0 +1,3 @@
+echo "Run the calculator with the inspector in UI mode"
+
+npx @modelcontextprotocol/inspector deno run calculator.ts
